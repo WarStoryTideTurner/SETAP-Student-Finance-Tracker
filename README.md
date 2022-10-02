@@ -6,12 +6,12 @@
 -Voting system
 
 ## Authors
-UP2028084
-UP2015765 - Tom Gill, WarStoryTideTurner
-UP2057450
-UP2065667
-UP2006563
-UP2047589
+UP2028084 <br />
+UP2015765 - Tom Gill, WarStoryTideTurner <br />
+UP2057450 <br />
+UP2065667 <br />
+UP2006563 <br />
+UP2047589 <br />
 
 ## Content
 
