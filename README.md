@@ -1,17 +1,18 @@
 # SETAP-Student-Finance-Tracker
--Communal house buying app
--Put money into 'pot'
-  -Shows how much each person has put in
--Shows and compares the prices of different items
+-Communal house buying app\
+-Put money into 'pot'\
+-Shows how much each person has put in\
+-Shows and compares the prices of different items\
 -Voting system
 
 ## Authors
-UP2028084 <br />
-UP2015765 - Tom Gill, WarStoryTideTurner <br />
-UP2057450 <br />
-UP2065667 <br />
-UP2006563 <br />
-UP2047589 <br />
+UP2028084 - \
+UP2015765 - Tom Gill, WarStoryTideTurner\
+UP2024896 - \
+UP2057450 - \
+UP2065667 - \
+UP2006563 - \
+UP2047589 - 
 
 ## Content
 
