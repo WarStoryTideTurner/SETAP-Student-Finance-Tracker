@@ -8,7 +8,7 @@
 ## Authors
 UP2028084 - \
 UP2015765 - Tom Gill, WarStoryTideTurner\
-UP2024896 - \
+UP2024896 - Karol Lubicz-Gruzewski, Kvrolix
 UP2057450 - \
 UP2065667 - Christopher Laming, ChrisNeedsCoffee\
 UP2006563 - Jeremy Desrosiers, kijilas\
