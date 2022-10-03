@@ -11,7 +11,7 @@ UP2015765 - Tom Gill, WarStoryTideTurner\
 UP2024896 - \
 UP2057450 - \
 UP2065667 - Christopher Laming, ChrisNeedsCoffee\
-UP2006563 - Jeremy Desrosiers, kijilas
+UP2006563 - Jeremy Desrosiers, kijilas\
 UP2047589 - David Skelton, Diggydave123
 
 ## Content
