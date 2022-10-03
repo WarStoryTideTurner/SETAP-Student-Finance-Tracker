@@ -6,7 +6,7 @@
 -Voting system
 
 ## Authors
-UP2028084 - \
+UP2028084 - Ramandeep Kaur, UP2028084\
 UP2015765 - Tom Gill, WarStoryTideTurner\
 UP2024896 - Karol Lubicz-Gruzewski, Kvrolix\
 UP2057450 - \
