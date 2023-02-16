@@ -1,5 +1,19 @@
 import 'package:flutter/material.dart';
 
+class Email {
+  final String sender;
+  final String subject;
+  final String message;
+
+  bool selected = false;
+
+  Email({
+    required this.sender,
+    required this.subject,
+    required this.message,
+  });
+}
+
 //Coded by Chris with a little help from ChatGPT
 //**Needs to be changed to be more personal and less AI generated before submission
 void main() => runApp(const MyApp());
@@ -10,6 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false, // Set this to false to remove the debug banner
       home: MainScreen(),
     );
   }
@@ -29,7 +44,7 @@ class MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const HouseRent(),
     const MapPage(),
-    const Inbox(),
+    Inbox(),
     const UserProfile(),
   ];
 
@@ -129,15 +144,183 @@ class MapPage extends StatelessWidget {
 }
 
 //Widget that handles stuff to do with the user's inbox
-class Inbox extends StatelessWidget {
-  const Inbox({super.key});
+//Coded by David with a little help from ChatGPT
+//**Needs to be changed to be more personal and less AI generated before submission
+class Inbox extends StatefulWidget {
+  const Inbox({Key? key}) : super(key: key);
+
+  @override
+  EmailPageState createState() => EmailPageState();
+}
+
+class EmailPageState extends State<Inbox> {
+  final List<Email> emails = [
+    Email(
+      sender: 'john.doe@example.com',
+      subject: 'Meeting',
+      message: 'Hey, are you available for a meeting at 2 PM?',
+    ),
+    Email(
+      sender: 'jane.doe@example.com',
+      subject: 'Task assigned',
+      message: 'You have been assigned a new task, please complete it by EOD.',
+    ),
+    Email(
+      sender: 'bob.smith@example.com',
+      subject: 'Reminder',
+      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+    ),
+    Email(
+      sender: 'steve.smith@example.com',
+      subject: 'Reminder',
+      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+    ),
+    Email(
+      sender: 'jenny.smith@example.com',
+      subject: 'Reminder',
+      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+    ),
+    Email(
+      sender: 'bob.smith@example.com',
+      subject: 'Reminder',
+      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+    ),
+    Email(
+      sender: 'bob.smith@example.com',
+      subject: 'Reminder',
+      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+    ),
+    Email(
+      sender: 'bob.smith@example.com',
+      subject: 'Reminder',
+      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+    ),
+    Email(
+      sender: 'bob.smith@example.com',
+      subject: 'Reminder',
+      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+    ),
+    Email(
+      sender: 'bob.smith@example.com',
+      subject: 'Reminder',
+      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+    ),
+    Email(
+      sender: 'bob.smith@example.com',
+      subject: 'Reminder',
+      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+    ),
+    Email(
+      sender: 'bob.smith@example.com',
+      subject: 'Reminder',
+      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+    ),
+    Email(
+      sender: 'bob.smith@example.com',
+      subject: 'Reminder',
+      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+    ),
+    // Add more emails here...
+  ];
+
+  List<Email> selectedEmails = [];
+
+  void toggleEmailSelected(Email email) {
+    setState(() {
+      email.selected = !email.selected;
+      if (email.selected) {
+        selectedEmails.add(email);
+      } else {
+        selectedEmails.remove(email);
+      }
+    });
+  }
+
+  void deleteSelectedEmails() {
+    setState(() {
+      selectedEmails.forEach((email) {
+        emails.remove(email);
+      });
+      selectedEmails.clear();
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color.fromARGB(255, 69, 202, 196),
-      child: const Center(
-        child: Text('Inbox'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(selectedEmails.isEmpty ? 'Inbox' : '${selectedEmails.length} selected'),
+        actions: [
+          if (selectedEmails.isNotEmpty)
+            IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: deleteSelectedEmails,
+            ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: emails.length,
+              itemBuilder: (context, index) {
+                final email = emails[index];
+                return ListTile(
+                  leading: Checkbox(
+                    value: email.selected,
+                    onChanged: (value) => toggleEmailSelected(email),
+                  ),
+                  title: Text(email.subject),
+                  subtitle: Text(email.sender),
+                  onTap: () {
+                    // Navigate to email details page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EmailDetailsPage(email: email),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class EmailDetailsPage extends StatelessWidget {
+  final Email email;
+
+  const EmailDetailsPage({Key? key, required this.email}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(email.subject),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'From: ${email.sender}',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              email.message,
+              style: const TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
       ),
     );
   }
