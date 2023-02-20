@@ -1,16 +1,12 @@
 # flutter_designs
 
-A new Flutter project.
+This is the starting point for the project. Within the main.dart file, resides a linkedHashMap named _widgetOptions. This contains pages and their buttons in the format:
 
-## Getting Started
+`const [page]: const BottomNavigationBarItem(
+    icon: [icon],
+    label: "[label]",
+)`
 
-This project is a starting point for a Flutter application.
+When adding a new page, add the .dart file to 'lib' and update this linkedHashMap to match.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Currently these page files are only placeholders: my_home_page.dart, my_inbox_page.dart, my_map_page.dart, my_rent_page.dart.
