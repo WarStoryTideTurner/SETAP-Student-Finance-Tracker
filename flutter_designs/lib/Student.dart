@@ -1,39 +1,38 @@
 class Student {
-  late String _name;
-  late String _surname;
-  late String _email;
-  late String _addressLineOne;
-  late String _addressLineTwo;
-  late String _city;
-  late String _county;
-  late String _postCode;
+  String _name;
+  String _surname;
+  String _email;
+  String _addressLineOne;
+  String _addressLineTwo;
+  String _city;
+  String _county;
+  String _postCode;
 
-  late DateTime _dateOfBirth;
-  late int _countryCode;
-  late int _phoneNumber;
+  DateTime _dateOfBirth;
+
+  int _countryCode;
+  int _phoneNumber;
+
+  //var dateFormat = DateTime(year);
 
   Student(
-      String name,
-      String surname,
-      String email,
-      String addressLineOne,
-      String addressLineTwo,
-      String city,
-      String county,
-      String postCode,
-      DateTime dateOfBirth,
-      int countryCode,
-      int phoneNumber) {
-    _name = name;
-    _surname = surname;
-    _email = email;
-    _addressLineOne = addressLineOne;
-    _addressLineTwo = addressLineTwo;
-    _city = city;
-    _county = county;
-    _postCode = postCode;
-    _dateOfBirth = dateOfBirth;
-    _countryCode = countryCode;
-    _phoneNumber = phoneNumber;
-  }
+      this._name,
+      this._surname,
+      this._email,
+      this._addressLineOne,
+      this._addressLineTwo,
+      this._city,
+      this._county,
+      this._postCode,
+      this._dateOfBirth,
+      this._countryCode,
+      this._phoneNumber);
+
+  // String toString() {
+  //   return 'Student{name: $_name, surname: $_surname, email: $_email, '
+  //       'addressLineOne: $_addressLineOne, addressLineTwo: $_addressLineTwo, '
+  //       'city: $_city, county: $_county, postCode: $_postCode, '
+  //       'dateOfBirth: $_dateOfBirth, countryCode: $_countryCode, '
+  //       'phoneNumber: $_phoneNumber}';
+  // }
 }
