@@ -20,6 +20,7 @@ class _MyRentPageState extends State<MyRentPage> {
           Center(
             child: CircleAvatar(
               radius: 80.0,
+              backgroundImage: AssetImage('assets/images/house1.jpeg'),
             ),
           ),
           Center(
