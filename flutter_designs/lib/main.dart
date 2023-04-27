@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_designs/student.dart';
 
 import 'package:flutter_designs/my_home_page.dart';
 import 'package:flutter_designs/my_profile_page.dart';
@@ -37,27 +38,18 @@ class NavBarWidget extends StatefulWidget {
 class _NavBarPageState extends State<NavBarWidget> {
   int _selectedIndex = 0;
 
-  static final LinkedHashMap<StatefulWidget, BottomNavigationBarItem> _widgetOptions = LinkedHashMap.from({
+  static final LinkedHashMap<StatefulWidget, BottomNavigationBarItem>
+      _widgetOptions = LinkedHashMap.from({
     const MyProfilePage(): const BottomNavigationBarItem(
-      icon: Icon(Icons.person),
-      label: 'Profile'
-    ),
-    const MyInboxPage(): const BottomNavigationBarItem(
-      icon: Icon(Icons.mail),
-      label: 'Inbox'
-    ),
-    const MyHomePage(): const BottomNavigationBarItem(
-      icon: Icon(Icons.house),
-      label: 'Home'
-    ),
-    const MyMapPage(): const BottomNavigationBarItem(
-      icon: Icon(Icons.map),
-      label: 'Map'
-    ),
-    const MyRentPage(): const BottomNavigationBarItem(
-      icon: Icon(Icons.money),
-      label: 'Rent'
-    )
+        icon: Icon(Icons.person), label: 'Profile'),
+    const MyInboxPage():
+        const BottomNavigationBarItem(icon: Icon(Icons.mail), label: 'Inbox'),
+    const MyHomePage():
+        const BottomNavigationBarItem(icon: Icon(Icons.house), label: 'Home'),
+    const MyMapPage():
+        const BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
+    const MyRentPage():
+        const BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Rent')
   });
 
   void _onItemTapped(int index) {
