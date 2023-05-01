@@ -47,7 +47,7 @@ class _MyRentPageState extends State<MyRentPage> {
           Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Color.fromARGB(255, 209, 204, 204),
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
@@ -93,7 +93,7 @@ class _MyRentPageState extends State<MyRentPage> {
           Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Color.fromARGB(255, 209, 204, 204),
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
@@ -145,7 +145,7 @@ class _MyRentPageState extends State<MyRentPage> {
           Container(
             padding: EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Color.fromARGB(255, 209, 204, 204),
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
