@@ -12,12 +12,12 @@ class _MyRentPageState extends State<MyRentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('House Profile'),
+        title: const Text('House Profile'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
+          const Center(
             child: CircleAvatar(
               radius: 80.0,
               backgroundImage: AssetImage('assets/images/house1.jpeg'),
@@ -25,10 +25,10 @@ class _MyRentPageState extends State<MyRentPage> {
           ),
           Center(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     '123 Some Street',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -43,32 +43,32 @@ class _MyRentPageState extends State<MyRentPage> {
               ),
             ),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 209, 204, 204),
+              color: const Color.fromARGB(255, 209, 204, 204),
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 1,
                   blurRadius: 3,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 )
               ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "House mates",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
-                Container(
+                SizedBox(
                   height: 120,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
@@ -89,35 +89,35 @@ class _MyRentPageState extends State<MyRentPage> {
               ],
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 209, 204, 204),
+              color: const Color.fromARGB(255, 209, 204, 204),
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 1,
                   blurRadius: 3,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 )
               ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Rent & Bills",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Text(
                       "Rent",
                       style: TextStyle(fontSize: 10),
@@ -128,10 +128,10 @@ class _MyRentPageState extends State<MyRentPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Text(
                       "Electricity",
                       style: TextStyle(fontSize: 16),
@@ -141,37 +141,37 @@ class _MyRentPageState extends State<MyRentPage> {
               ],
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Container(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 209, 204, 204),
+              color: const Color.fromARGB(255, 209, 204, 204),
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 1,
                   blurRadius: 3,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Money pot",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text("Amount Accumulated ")])
+                    children: const [Text("Amount Accumulated ")])
               ],
             ),
           ) //xwPadding(padding: xw)
@@ -192,7 +192,7 @@ class _MyRentPageState extends State<MyRentPage> {
 
 Widget _createRoomMatesProfiles(String imagePath) {
   return Padding(
-    padding: EdgeInsets.only(right: 16),
+    padding: const EdgeInsets.only(right: 16),
     child: CircleAvatar(
       radius: 30,
       backgroundImage: AssetImage(imagePath),
