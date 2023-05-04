@@ -20,9 +20,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false, // Set this to false to remove the debug banner
+      debugShowCheckedModeBanner:
+          false, // Set this to false to remove the debug banner
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(fontFamily: "Rubik"),
+          labelLarge: TextStyle(fontFamily: "Rubik"),
+        ),
       ),
       home: const NavBarWidget(),
     );

@@ -12,7 +12,10 @@ class _MyRentPageState extends State<MyRentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('House Profile'),
+        title: const Text(
+          'House Profile',
+          style: TextStyle(fontFamily: "Rubik"),
+        ),
       ),
       endDrawer: Drawer(
         child: ListView(
@@ -39,19 +42,24 @@ class _MyRentPageState extends State<MyRentPage> {
               ),
             ),
             ListTile(
-              title: Text("Item 1"),
+              title: const Text(
+                "Item 1",
+                style: TextStyle(fontFamily: "Rubik"),
+              ),
               onTap: () {
                 //Functionality
               },
             ),
             ListTile(
-              title: Text("Item 2"),
+              title:
+                  const Text("Item 2", style: TextStyle(fontFamily: "Rubik")),
               onTap: () {
                 //Functionality
               },
             ),
             ListTile(
-              title: Text("Item 3"),
+              title:
+                  const Text("Item 3", style: TextStyle(fontFamily: "Rubik")),
               onTap: () {
                 //Functionality
               },
@@ -76,13 +84,18 @@ class _MyRentPageState extends State<MyRentPage> {
                 children: const [
                   Text(
                     '123 Some Street',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(height: 8.0),
                   Text(
                     'Portsmouth, PO4 2DF',
-                    style:
-                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Rubik"),
                   )
                 ],
               ),
@@ -109,7 +122,10 @@ class _MyRentPageState extends State<MyRentPage> {
                 const Center(
                   child: Text(
                     "House mates",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Rubik"),
                   ),
                 ),
                 const SizedBox(
@@ -183,7 +199,7 @@ class _MyRentPageState extends State<MyRentPage> {
                   children: const [
                     Text(
                       "Electricity",
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16, fontFamily: "Rubik"),
                     ),
                   ],
                 )
@@ -212,9 +228,9 @@ class _MyRentPageState extends State<MyRentPage> {
                   child: Text(
                     "Money pot",
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Rubik"),
                   ),
                 ),
                 const SizedBox(
@@ -222,7 +238,12 @@ class _MyRentPageState extends State<MyRentPage> {
                 ),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [Text("Amount Accumulated ")])
+                    children: const [
+                      Text(
+                        "Amount Accumulated ",
+                        style: TextStyle(fontFamily: "Rubik"),
+                      )
+                    ])
               ],
             ),
           ) //xwPadding(padding: xw)
