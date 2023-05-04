@@ -14,6 +14,51 @@ class _MyRentPageState extends State<MyRentPage> {
       appBar: AppBar(
         title: const Text('House Profile'),
       ),
+      endDrawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            Container(
+              height: 50,
+              child: const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                ),
+                child: Center(
+                    child: Text(
+                  "Header",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Rubik"),
+                )),
+              ),
+            ),
+            ListTile(
+              title: Text("Item 1"),
+              onTap: () {
+                //Functionality
+              },
+            ),
+            ListTile(
+              title: Text("Item 2"),
+              onTap: () {
+                //Functionality
+              },
+            ),
+            ListTile(
+              title: Text("Item 3"),
+              onTap: () {
+                //Functionality
+              },
+            )
+          ],
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -61,9 +106,11 @@ class _MyRentPageState extends State<MyRentPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "House mates",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                const Center(
+                  child: Text(
+                    "House mates",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
@@ -107,11 +154,13 @@ class _MyRentPageState extends State<MyRentPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Rent & Bills",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                const Center(
+                  child: Text(
+                    "Rent & Bills",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -159,11 +208,13 @@ class _MyRentPageState extends State<MyRentPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Money pot",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                const Center(
+                  child: Text(
+                    "Money pot",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const SizedBox(
