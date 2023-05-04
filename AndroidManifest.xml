@@ -1,15 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myapplication">
+    package="com.example.homepage">
    <application
-        android:label="myapplication"
+        android:label="homepage"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
-        <!-- Add the following permissions
-        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
-
-        <!-- Add the following meta-data element for your API key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA_Mq8cDnUbITWNTHj0Vp-Hxk5rvIj-S9E" />
