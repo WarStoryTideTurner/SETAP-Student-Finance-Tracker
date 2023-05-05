@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner:
           false, // Set this to false to remove the debug banner
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blue,
         textTheme: const TextTheme(
           bodyMedium: TextStyle(fontFamily: "Rubik"),
           labelLarge: TextStyle(fontFamily: "Rubik"),
