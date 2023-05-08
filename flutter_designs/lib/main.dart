@@ -21,7 +21,8 @@ late House sampleHouse;
 
 void main() {
   profile = StudentClass(0, "Karol", "Krzystof Floraan Lubicz-Gruzewski", 'assets/images/pfp1.jpg', "karol69@gmail.com", "42069 420 666");
-  sampleHouse = House(0, "187", "Body Coats' Road", "Chandler's Ford", "S053 2JA", EHouseTypes.semiDetachedHouse, "An ugly small house with a red garage.", 3, 1, 1, true, true, true);
+  sampleHouse =
+      House(0, 'assets/images/house1.jpeg', "123", "Perfect Street", "Portsmouth", "PO4 21S", EHouseTypes.semiDetachedHouse, "An ugly small house with a red garage.", 3, 1, 1, true, true, true);
 
   runApp(const MyApp());
 }
@@ -54,7 +55,7 @@ class NavBarWidget extends StatefulWidget {
 }
 
 class _NavBarPageState extends State<NavBarWidget> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   static final LinkedHashMap<StatefulWidget, BottomNavigationBarItem> _widgetOptions = LinkedHashMap.from({
     const MyProfilePage(): const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),

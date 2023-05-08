@@ -5,6 +5,7 @@ class House {
   //House's Personal Details
 
   final int _id;
+  String _housePicturePath;
   String _houseNumberOrName;
   String _addressLineOne;
   String _addressLineTwo;
@@ -23,6 +24,7 @@ class House {
 
   House(
     this._id,
+    this._housePicturePath,
     this._houseNumberOrName,
     this._addressLineOne,
     this._addressLineTwo,
@@ -40,6 +42,7 @@ class House {
   }
 
   int get getID => _id;
+  String get getHousePicturePath => _housePicturePath;
   String get getHouseNumber => _houseNumberOrName;
   String get getAddressLineOne => _addressLineOne;
   String get getAddressLineTwo => _addressLineTwo;
@@ -61,6 +64,7 @@ class House {
   }
 
   void editHouseDetails({
+    String? housePicturePath,
     EHouseTypes? houseType,
     String? description,
     int? numOfBedrooms,
@@ -70,6 +74,7 @@ class House {
     bool? hasParkingSpace,
     bool? hasGardenOrPatio,
   }) {
+    _housePicturePath = housePicturePath!;
     _houseType = houseType!;
     _description = description!;
     _numOfBedrooms = numOfBedrooms!;
@@ -81,9 +86,12 @@ class House {
   }
 
   void addResident(StudentClass resident) => residents.add(resident);
-  void findResident({
-    String? fName,
-    String? lName,
-  }) {}
+  StudentClass findResident({String? fName, String? lName}) {
+    for (int i = 0; i < residents.length; i++) {
+      if (residents.elementAt(i).getName == fName && residents.elementAt(i).getSurname == lName) return residents.elementAt(i);
+    }
+    throw Exception("Error: Student was not found!");
+  }
+
   void removeResident(StudentClass resident) => residents.remove(resident);
 }
