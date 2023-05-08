@@ -14,7 +14,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
     text: "${profile.getName} ${profile.getSurname}",
   );
   TextEditingController email = TextEditingController(text: profile.getEmail);
-  TextEditingController phone = TextEditingController(text: profile.getPhoneNumber);
+  TextEditingController phone =
+      TextEditingController(text: profile.getPhoneNumber);
 
   double sectionWidth = 250.0;
   double sectionHeight = 250.0;
@@ -57,7 +58,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    CircleAvatar(backgroundImage: AssetImage(profile.getProfilePicture), radius: 50),
+                    CircleAvatar(
+                        backgroundImage: AssetImage(profile.getProfilePicture),
+                        radius: 50),
                     const SizedBox(
                       height: 10,
                     ),
@@ -67,7 +70,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         readOnly: true,
                         enableInteractiveSelection: false,
                         mouseCursor: SystemMouseCursors.basic,
-                        decoration: const InputDecoration(border: InputBorder.none, contentPadding: EdgeInsets.only(bottom: 10.0), isDense: true),
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.only(bottom: 10.0),
+                            isDense: true),
                       ),
                     ),
                     IntrinsicWidth(
@@ -76,7 +82,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         readOnly: true,
                         enableInteractiveSelection: false,
                         mouseCursor: SystemMouseCursors.basic,
-                        decoration: const InputDecoration(border: InputBorder.none, contentPadding: EdgeInsets.only(bottom: 10.0), isDense: true),
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.only(bottom: 10.0),
+                            isDense: true),
                       ),
                     ),
                     IntrinsicWidth(
@@ -85,7 +94,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         readOnly: true,
                         enableInteractiveSelection: false,
                         mouseCursor: SystemMouseCursors.basic,
-                        decoration: const InputDecoration(border: InputBorder.none, contentPadding: EdgeInsets.zero, isDense: true),
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.zero,
+                            isDense: true),
                       ),
                     ),
                     const SizedBox(
@@ -95,15 +107,19 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       height: 25,
                       width: 120,
                       child: TextButton(
-                        style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith((states) {
+                        style: ButtonStyle(backgroundColor:
+                            MaterialStateProperty.resolveWith((states) {
                           return Colors.black;
                         })),
                         onPressed: () async {
-                          await Navigator.of(context).push(MaterialPageRoute<MyProfileEditingPage>(builder: ((context) {
+                          await Navigator.of(context).push(
+                              MaterialPageRoute<MyProfileEditingPage>(
+                                  builder: ((context) {
                             return const MyProfileEditingPage();
                           })));
                           setState(() {
-                            name.text = "${profile.getName} ${profile.getSurname}";
+                            name.text =
+                                "${profile.getName} ${profile.getSurname}";
                             email.text = profile.getEmail;
                             phone.text = profile.getPhoneNumber;
                           });
@@ -142,8 +158,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
               margin: const EdgeInsets.all(20.0),
               child: SizedBox(
                   width: sectionWidth,
-                  child: const Wrap(
-                    children: [Text('Current House')],
+                  child: Wrap(
+                    children: const [Text('Current House')],
                   )),
             )
           ],

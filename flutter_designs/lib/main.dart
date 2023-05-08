@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false, // Set this to false to remove the debug banner
+      debugShowCheckedModeBanner:
+          false, // Set this to false to remove the debug banner
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: const TextTheme(
@@ -58,12 +59,18 @@ class NavBarWidget extends StatefulWidget {
 class _NavBarPageState extends State<NavBarWidget> {
   int _selectedIndex = 0;
 
-  static final LinkedHashMap<StatefulWidget, BottomNavigationBarItem> _widgetOptions = LinkedHashMap.from({
-    const MyProfilePage(): const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-    const MyInboxPage(): const BottomNavigationBarItem(icon: Icon(Icons.mail), label: 'Inbox'),
-    const MyHomePage(): const BottomNavigationBarItem(icon: Icon(Icons.house), label: 'Home'),
-    const MyMapPage(): const BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
-    const MyRentPage(): const BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Rent')
+  static final LinkedHashMap<StatefulWidget, BottomNavigationBarItem>
+      _widgetOptions = LinkedHashMap.from({
+    const MyProfilePage(): const BottomNavigationBarItem(
+        icon: Icon(Icons.person), label: 'Profile'),
+    const MyInboxPage():
+        const BottomNavigationBarItem(icon: Icon(Icons.mail), label: 'Inbox'),
+    MyHomePage():
+        const BottomNavigationBarItem(icon: Icon(Icons.house), label: 'Home'),
+    const MyMapPage():
+        const BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
+    const MyRentPage():
+        const BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Rent')
   });
 
   void _onItemTapped(int index) {

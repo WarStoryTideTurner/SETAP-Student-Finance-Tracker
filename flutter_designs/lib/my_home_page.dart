@@ -1,51 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter_designs/my_home_page.dart';
 import 'package:flutter_designs/my_profile_page.dart';
-import 'package:flutter_designs/my_profile_editing_page.dart';
+import 'package:flutter_designs/main.dart';
 import 'package:flutter_designs/my_inbox_page.dart';
 import 'package:flutter_designs/my_map_page.dart';
 import 'package:flutter_designs/my_rent_page.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Color welcomeColor = Colors.purple;
-  Color rentMoneyPotColor = Colors.white;
-  Color profileColor = Colors.green;
-  Color inboxColor = Colors.blue;
-  Color mapColor = Colors.orange;
+  String username = "user"; // Replace with the actual username
+  int moneyPotAmount = 90; // Updated amount
+  int rentBillAmount = 400;
+
+  Color welcomeColor = const Color.fromARGB(255, 241, 164, 255);
+  Color rentMoneyPotColor = const Color.fromARGB(255, 211, 208, 208);
+  Color profileColor = const Color.fromARGB(255, 248, 228, 197);
+  Color inboxColor = const Color.fromARGB(255, 184, 222, 253);
+  Color mapColor = Colors.red;
   Color containerColor = Colors.yellowAccent;
 
   void onContainerClick(String containerName) {
     switch (containerName) {
       case 'Profile':
+        print('Container clicked: $Route');
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MyProfilePage()),
+          MaterialPageRoute(builder: (context) => const MyProfilePage()),
         );
         break;
       case 'Map':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MyMapPage()),
+          MaterialPageRoute(builder: (context) => const MyMapPage()),
         );
         break;
       case 'Inbox':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MyInboxPage()),
+          MaterialPageRoute(builder: (context) => const MyInboxPage()),
         );
         break;
       case 'Rent':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MyRentPage()),
+          MaterialPageRoute(builder: (context) => const MyRentPage()),
         );
         break;
       default:
@@ -53,13 +55,24 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  TextEditingController name = TextEditingController(text: profile.getName);
+  TextEditingController email = TextEditingController(text: profile.getEmail);
+  TextEditingController phoneNumber =
+      TextEditingController(text: profile.getPhoneNumber);
+  TextEditingController profilePic =
+      TextEditingController(text: profile.getProfilePicture);
+  TextEditingController surname =
+      TextEditingController(text: profile.getSurname);
+
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
     DateTime firstDayOfNextMonth = DateTime(now.year, now.month + 1, 1);
     Duration duration = firstDayOfNextMonth.difference(now);
     int daysLeft = duration.inDays;
+
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SafeArea(
           child: Column(
@@ -68,13 +81,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 height: 100,
                 color: welcomeColor,
-                child: const Center(
+                child: Center(
                   child: Text(
-                    'Welcome, User!',
-                    style: TextStyle(
+                    'Welcome, $username!',
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -98,20 +111,18 @@ class _MyHomePageState extends State<MyHomePage> {
                             color: Colors.black,
                           ),
                         ),
-
-                        //This will create a DateTime object for the first day of the next month, calculate the duration between that date and the current date using the difference method, and get the number of days from that duration using the inDays property. You can replace the current "Due in 27 days" text with the above code to show the correct number of days left.
                         const SizedBox(height: 8),
-                        const Text(
-                          'Rent amount: £400',
-                          style: TextStyle(
+                        Text(
+                          'Amount: £${rentBillAmount.toString()}',
+                          style: const TextStyle(
                             fontSize: 20,
                             color: Colors.black,
                           ),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          'Money Pot amount: £90',
-                          style: TextStyle(
+                        Text(
+                          'Money Pot Amount: £${moneyPotAmount.toString()}',
+                          style: const TextStyle(
                             fontSize: 20,
                             color: Colors.black,
                           ),
@@ -137,14 +148,58 @@ class _MyHomePageState extends State<MyHomePage> {
                             color: profileColor,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                SizedBox(height: 8),
-                                Text(
-                                  'Profile',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                              children: [
+                                const SizedBox(height: 8),
+                                IntrinsicWidth(
+                                  child: TextField(
+                                    controller: name,
+                                    readOnly: true,
+                                    enableInteractiveSelection: false,
+                                    mouseCursor: SystemMouseCursors.basic,
+                                    decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                        contentPadding:
+                                            EdgeInsets.only(bottom: 10.0),
+                                        isDense: true),
+                                  ),
+                                ),
+                                IntrinsicWidth(
+                                  child: TextField(
+                                    controller: email,
+                                    readOnly: true,
+                                    enableInteractiveSelection: false,
+                                    mouseCursor: SystemMouseCursors.basic,
+                                    decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                        contentPadding:
+                                            EdgeInsets.only(bottom: 10.0),
+                                        isDense: true),
+                                  ),
+                                ),
+                                IntrinsicWidth(
+                                  child: TextField(
+                                    controller: phoneNumber,
+                                    readOnly: true,
+                                    enableInteractiveSelection: false,
+                                    mouseCursor: SystemMouseCursors.basic,
+                                    decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                        contentPadding:
+                                            EdgeInsets.only(bottom: 10.0),
+                                        isDense: true),
+                                  ),
+                                ),
+                                IntrinsicWidth(
+                                  child: TextField(
+                                    controller: profilePic,
+                                    readOnly: true,
+                                    enableInteractiveSelection: false,
+                                    mouseCursor: SystemMouseCursors.basic,
+                                    decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                        contentPadding:
+                                            EdgeInsets.only(bottom: 10.0),
+                                        isDense: true),
                                   ),
                                 ),
                               ],
@@ -179,7 +234,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   ),
                                 ),
                               ],
@@ -194,27 +249,35 @@ class _MyHomePageState extends State<MyHomePage> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () => onContainerClick('Map'),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      color: mapColor,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    color: mapColor,
+                    child: GestureDetector(
+                      onTap: () => onContainerClick('Map'),
                       child: Stack(
                         children: [
-                          const GoogleMap(
-                            initialCameraPosition: CameraPosition(
-                              target: LatLng(37.7749, -122.4194),
-                              zoom: 12,
-                            ),
-                          ),
+                          GoogleMap(
+                              initialCameraPosition: const CameraPosition(
+                                target: LatLng(37.7749, -122.4194),
+                                zoom: 12,
+                              ),
+                              zoomControlsEnabled: false,
+                              scrollGesturesEnabled: false,
+                              rotateGesturesEnabled: false,
+                              tiltGesturesEnabled: false,
+                              zoomGesturesEnabled: false,
+                              gestureRecognizers: Set()
+                              // ..add(Factory<EagerGestureRecognizer>(
+                              //     () => EagerGestureRecognizer())),
+                              ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
                               Icon(
                                 Icons.map,
-                                color: Colors.white,
+                                color: Color.fromARGB(255, 246, 130, 41),
                               ),
                               SizedBox(height: 8),
                               Text(
@@ -232,7 +295,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),
