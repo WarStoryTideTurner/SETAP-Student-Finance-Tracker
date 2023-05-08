@@ -1,73 +1,74 @@
+import 'package:flutter_designs/house_type.dart';
+
 class House {
-//house number , first line of the address, second line of the address, postcode, number of rooms, num of kitchens, num of bathrooms, petsAllowed boolean,
-  int _id;
-  int _houseNumber;
-  String _firstLineOfAddress;
-  String _secondLineOfAddress;
+  final int _id;
+  String _houseNumberOrName;
+  String _addressLineOne;
+  String _addressLineTwo;
   String _postCode;
+  EHouseTypes _houseType; // Enum containing different house types.
   String _description;
   int _numOfBedrooms;
   int _numOfKitchens;
   int _numOfBathrooms;
-  bool _isPetsAllowed;
-  bool _isParkingSpace;
-  bool _garden;
-
-  //List<String> myList;
-
-  //create a List of the type of houses
+  bool _arePetsAllowed;
+  bool _hasParkingSpace;
+  bool _hasGardenOrPatio;
 
   House(
-      this._id,
-      this._houseNumber,
-      this._firstLineOfAddress,
-      this._secondLineOfAddress,
-      this._postCode,
-      this._description,
-      this._numOfBedrooms,
-      this._numOfKitchens,
-      this._numOfBathrooms,
-      this._isPetsAllowed,
-      this._isParkingSpace,
-      this._garden);
-}
+    this._id,
+    this._houseNumberOrName,
+    this._addressLineOne,
+    this._addressLineTwo,
+    this._postCode,
+    this._houseType,
+    this._description,
+    this._numOfBedrooms,
+    this._numOfKitchens,
+    this._numOfBathrooms,
+    this._arePetsAllowed,
+    this._hasParkingSpace,
+    this._hasGardenOrPatio,
+  );
 
-set houseNum(int houseNumber) {
-  int _houseNumber = houseNumber;
-}
+  int get getID => _id;
+  String get getHouseNumber => _houseNumberOrName;
+  String get getAddressLineOne => _addressLineOne;
+  String get getAddressLineTwo => _addressLineTwo;
+  String get getPostCode => _postCode;
+  EHouseTypes get getHouseType => _houseType; // Enum containing different house types.
+  String get getDescription => _description;
+  int get getNumOfBedrooms => _numOfBedrooms;
+  int get getNumOfKitchens => _numOfKitchens;
+  int get getNumOfBathrooms => _numOfBathrooms;
+  bool get arePetsAllowed => _arePetsAllowed;
+  bool get hasParkingSpace => _hasParkingSpace;
+  bool get hasGardenOrPatio => _hasGardenOrPatio;
 
-set firstLineAddress(String firstLine) {
-  String _firstLineAddress = firstLine;
-}
+  void setAddress(String houseNoOrName, String addressLineOne, String addressLineTwo, String postCode) {
+    _houseNumberOrName = houseNoOrName;
+    _addressLineOne = addressLineOne;
+    _addressLineTwo = addressLineTwo;
+    _postCode = postCode;
+  }
 
-set secondLineAddress(String secondLine) {
-  String _secondLineAddress = secondLine;
-}
-
-set postCode(String postCode) {
-  String _postCode = postCode;
-}
-
-set description(String description) {
-  String _description = description;
-}
-
-set numOfBedrooms(int numOfBedrooms) {
-  int _numOfBedrooms = numOfBedrooms;
-}
-
-set numOfKitchen(int numOfKitchens) {
-  int _numOfKitchen = numOfKitchens;
-}
-
-set numOfBathrooms(int numOfBathrooms) {
-  int _numOfBathrooms = numOfBathrooms;
-}
-
-set petsAllowed(bool petsAllowed) {
-  bool _petsAllowed = petsAllowed;
-}
-
-set parkingSpace(bool parking) {
-  bool _isParkingSpace = parking;
+  void editHouseDetails({
+    EHouseTypes? houseType,
+    String? description,
+    int? numOfBedrooms,
+    int? numOfKitchens,
+    int? numOfBathrooms,
+    bool? arePetsAllowed,
+    bool? hasParkingSpace,
+    bool? hasGardenOrPatio,
+  }) {
+    _houseType = houseType!;
+    _description = description!;
+    _numOfBedrooms = numOfBedrooms!;
+    _numOfKitchens = numOfKitchens!;
+    _numOfBathrooms = numOfBathrooms!;
+    _arePetsAllowed = arePetsAllowed!;
+    _hasParkingSpace = hasParkingSpace!;
+    _hasGardenOrPatio = hasGardenOrPatio!;
+  }
 }
