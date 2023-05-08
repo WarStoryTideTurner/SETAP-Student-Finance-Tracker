@@ -1,6 +1,9 @@
 import 'package:flutter_designs/house_type.dart';
+import 'package:flutter_designs/student_class.dart';
 
 class House {
+  //House's Personal Details
+
   final int _id;
   String _houseNumberOrName;
   String _addressLineOne;
@@ -14,6 +17,9 @@ class House {
   bool _arePetsAllowed;
   bool _hasParkingSpace;
   bool _hasGardenOrPatio;
+
+  //Details of People in the House
+  late List<StudentClass> residents;
 
   House(
     this._id,
@@ -29,7 +35,9 @@ class House {
     this._arePetsAllowed,
     this._hasParkingSpace,
     this._hasGardenOrPatio,
-  );
+  ) {
+    residents = List.empty();
+  }
 
   int get getID => _id;
   String get getHouseNumber => _houseNumberOrName;
@@ -71,4 +79,11 @@ class House {
     _hasParkingSpace = hasParkingSpace!;
     _hasGardenOrPatio = hasGardenOrPatio!;
   }
+
+  void addResident(StudentClass resident) => residents.add(resident);
+  void findResident({
+    String? fName,
+    String? lName,
+  }) {}
+  void removeResident(StudentClass resident) => residents.remove(resident);
 }

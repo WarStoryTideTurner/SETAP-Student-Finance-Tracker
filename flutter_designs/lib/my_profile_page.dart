@@ -57,7 +57,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    CircleAvatar(backgroundImage: AssetImage(profile.getProfilePicture), radius: 50),
+                    CircleAvatar(
+                      backgroundImage: AssetImage(profile.getProfilePicture),
+                      radius: 50,
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -142,8 +145,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
               margin: const EdgeInsets.all(20.0),
               child: SizedBox(
                   width: sectionWidth,
-                  child: const Wrap(
-                    children: [Text('Current House')],
+                  child: Wrap(
+                    children: const [Text('Current House')],
                   )),
             )
           ],
