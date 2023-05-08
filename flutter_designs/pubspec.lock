@@ -77,7 +77,7 @@ packages:
       sha256: "8ffe990dac54a4a5492747added38571a5ab474c8e5d196809ea08849c69b1bb"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.13"
+    version: "2.0.14"
   flutter_test:
     dependency: "direct dev"
     description: flutter
