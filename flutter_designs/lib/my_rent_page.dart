@@ -235,6 +235,7 @@ class _MyRentPageState extends State<MyRentPage> {
     );
   }
 
+//
   double _totalAmount = 0;
 
   void _addToMoneyPot(String amount) {
