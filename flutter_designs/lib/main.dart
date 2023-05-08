@@ -3,6 +3,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_designs/house_type.dart';
 
 import 'package:flutter_designs/student_class.dart';
 import 'package:flutter_designs/house.dart';
@@ -16,14 +17,11 @@ import 'package:flutter_designs/my_map_page.dart';
 import 'package:flutter_designs/my_rent_page.dart';
 
 late StudentClass profile;
+late House sampleHouse;
 
 void main() {
-  profile = StudentClass(0);
-  profile.setName = "Karol";
-  profile.setSurname = "Krzystof Floraan Lubicz-Gruzewski";
-  profile.setProfilePicture = 'assets/images/pfp1.jpg';
-  profile.setEmail = "karol69@gmail.com";
-  profile.setPhoneNumber = "42069 420 666";
+  profile = StudentClass(0, "Karol", "Krzystof Floraan Lubicz-Gruzewski", 'assets/images/pfp1.jpg', "karol69@gmail.com", "42069 420 666");
+  sampleHouse = House(0, "187", "Body Coats' Road", "Chandler's Ford", "S053 2JA", EHouseTypes.semiDetachedHouse, "An ugly small house with a red garage.", 3, 1, 1, true, true, true);
 
   runApp(const MyApp());
 }

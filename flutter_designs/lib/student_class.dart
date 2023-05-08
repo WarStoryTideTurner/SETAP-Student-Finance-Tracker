@@ -6,9 +6,7 @@ class StudentClass {
   late String _email;
   late String _phoneNumber;
 
-  StudentClass(this._id);
-  StudentClass.copy(this._id, this._name, this._surname,
-      this._proflePicturePath, this._email, this._phoneNumber);
+  StudentClass(this._id, this._name, this._surname, this._proflePicturePath, this._email, this._phoneNumber);
 
   int get getID => _id;
   String get getName => _name;
