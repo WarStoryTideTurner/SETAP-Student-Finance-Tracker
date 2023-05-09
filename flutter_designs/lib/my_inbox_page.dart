@@ -15,8 +15,7 @@ class Email {
 }
 
 //Widget that handles stuff to do with the user's inbox
-//Coded by David with a little help from ChatGPT
-//**Needs to be changed to be more personal and less AI generated before submission
+//Coded by David
 
 class MyInboxPage extends StatefulWidget {
   const MyInboxPage({Key? key}) : super(key: key);
