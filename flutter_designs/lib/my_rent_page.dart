@@ -225,7 +225,7 @@ class _MyRentPageState extends State<MyRentPage> {
                             },
                             child: const Text("Pay"),
                           ),
-                          Text("Total Amount: £$_totalAmount"),
+                          Text("Total Amount: £$_totalAmountMoneyPot"),
                         ])
                   ],
                 ),
@@ -238,11 +238,11 @@ class _MyRentPageState extends State<MyRentPage> {
   }
 
 //
-  double _totalAmount = 0;
+  double _totalAmountMoneyPot = 0;
 
   void _addToMoneyPot(String amount) {
     setState(() {
-      _totalAmount += double.parse(amount);
+      _totalAmountMoneyPot += double.parse(amount);
     });
   }
 }
