@@ -8,6 +8,7 @@ import 'package:flutter_designs/house_type.dart';
 import 'package:flutter_designs/student_class.dart';
 import 'package:flutter_designs/house.dart';
 import 'package:flutter_designs/money_pot.dart';
+import 'package:flutter_designs/email.dart';
 
 import 'package:flutter_designs/my_home_page.dart';
 import 'package:flutter_designs/my_profile_page.dart';
@@ -16,8 +17,85 @@ import 'package:flutter_designs/my_inbox_page.dart';
 import 'package:flutter_designs/my_map_page.dart';
 import 'package:flutter_designs/my_rent_page.dart';
 
+NavBarPageState curNavBarState = NavBarPageState(); // Making the NavBarPageState public is a poor work around but will have to do under these time constraints.
+
+MyProfilePage profilePage = const MyProfilePage();
+MyInboxPage inboxPage = const MyInboxPage();
+MyHomePage homePage = const MyHomePage();
+MyMapPage mapPage = const MyMapPage();
+MyRentPage rentPage = const MyRentPage();
+
 late StudentClass profile;
 late House sampleHouse;
+
+List<Email> emails = [
+  Email(
+    sender: 'john.doe@example.com',
+    subject: 'Meeting',
+    message: 'Hey, are you available for a meeting at 2 PM?',
+  ),
+  Email(
+    sender: 'jane.doe@example.com',
+    subject: 'Task assigned',
+    message: 'You have been assigned a new task, please complete it by EOD.',
+  ),
+  Email(
+    sender: 'bob.smith@example.com',
+    subject: 'Reminder',
+    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  ),
+  Email(
+    sender: 'steve.smith@example.com',
+    subject: 'Reminder',
+    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  ),
+  Email(
+    sender: 'jenny.smith@example.com',
+    subject: 'Reminder',
+    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  ),
+  Email(
+    sender: 'bob.smith@example.com',
+    subject: 'Reminder',
+    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  ),
+  Email(
+    sender: 'bob.smith@example.com',
+    subject: 'Reminder',
+    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  ),
+  Email(
+    sender: 'bob.smith@example.com',
+    subject: 'Reminder',
+    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  ),
+  Email(
+    sender: 'bob.smith@example.com',
+    subject: 'Reminder',
+    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  ),
+  Email(
+    sender: 'bob.smith@example.com',
+    subject: 'Reminder',
+    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  ),
+  Email(
+    sender: 'bob.smith@example.com',
+    subject: 'Reminder',
+    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  ),
+  Email(
+    sender: 'bob.smith@example.com',
+    subject: 'Reminder',
+    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  ),
+  Email(
+    sender: 'bob.smith@example.com',
+    subject: 'Reminder',
+    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  ),
+  // Add more emails here...
+];
 
 void main() {
   profile = StudentClass(0, "Karol", "Krzystof Floraan Lubicz-Gruzewski", 'assets/images/pfp1.jpg', "karol69@gmail.com", "42069 420 666");
@@ -51,23 +129,23 @@ class NavBarWidget extends StatefulWidget {
   const NavBarWidget({super.key});
 
   @override
-  State<NavBarWidget> createState() => _NavBarPageState();
+  State<NavBarWidget> createState() => NavBarPageState();
 }
 
-class _NavBarPageState extends State<NavBarWidget> {
-  int _selectedIndex = 2;
+class NavBarPageState extends State<NavBarWidget> {
+  static int selectedIndex = 2;
 
   static final LinkedHashMap<StatefulWidget, BottomNavigationBarItem> _widgetOptions = LinkedHashMap.from({
-    const MyProfilePage(): const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-    const MyInboxPage(): const BottomNavigationBarItem(icon: Icon(Icons.mail), label: 'Inbox'),
-    const MyHomePage(): const BottomNavigationBarItem(icon: Icon(Icons.house), label: 'Home'),
-    const MyMapPage(): const BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
-    const MyRentPage(): const BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Rent')
+    profilePage: const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+    inboxPage: const BottomNavigationBarItem(icon: Icon(Icons.mail), label: 'Inbox'),
+    homePage: const BottomNavigationBarItem(icon: Icon(Icons.house), label: 'Home'),
+    mapPage: const BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
+    rentPage: const BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Rent')
   });
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
   }
 
@@ -75,7 +153,7 @@ class _NavBarPageState extends State<NavBarWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey,
-      body: _widgetOptions.keys.toList()[_selectedIndex],
+      body: _widgetOptions.keys.toList()[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           _widgetOptions.values.toList()[0],
@@ -84,7 +162,7 @@ class _NavBarPageState extends State<NavBarWidget> {
           _widgetOptions.values.toList()[3],
           _widgetOptions.values.toList()[4],
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: selectedIndex,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,

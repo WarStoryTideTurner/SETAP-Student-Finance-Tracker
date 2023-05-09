@@ -1,18 +1,6 @@
 import 'package:flutter/material.dart';
-
-class Email {
-  final String sender;
-  final String subject;
-  final String message;
-
-  bool selected = false;
-
-  Email({
-    required this.sender,
-    required this.subject,
-    required this.message,
-  });
-}
+import 'package:flutter_designs/main.dart' as main;
+import 'package:flutter_designs/email.dart';
 
 //Widget that handles stuff to do with the user's inbox
 //Coded by David with a little help from ChatGPT
@@ -26,74 +14,7 @@ class MyInboxPage extends StatefulWidget {
 }
 
 class _MyInboxPageState extends State<MyInboxPage> {
-  final List<Email> emails = [
-    Email(
-      sender: 'john.doe@example.com',
-      subject: 'Meeting',
-      message: 'Hey, are you available for a meeting at 2 PM?',
-    ),
-    Email(
-      sender: 'jane.doe@example.com',
-      subject: 'Task assigned',
-      message: 'You have been assigned a new task, please complete it by EOD.',
-    ),
-    Email(
-      sender: 'bob.smith@example.com',
-      subject: 'Reminder',
-      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-    ),
-    Email(
-      sender: 'steve.smith@example.com',
-      subject: 'Reminder',
-      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-    ),
-    Email(
-      sender: 'jenny.smith@example.com',
-      subject: 'Reminder',
-      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-    ),
-    Email(
-      sender: 'bob.smith@example.com',
-      subject: 'Reminder',
-      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-    ),
-    Email(
-      sender: 'bob.smith@example.com',
-      subject: 'Reminder',
-      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-    ),
-    Email(
-      sender: 'bob.smith@example.com',
-      subject: 'Reminder',
-      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-    ),
-    Email(
-      sender: 'bob.smith@example.com',
-      subject: 'Reminder',
-      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-    ),
-    Email(
-      sender: 'bob.smith@example.com',
-      subject: 'Reminder',
-      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-    ),
-    Email(
-      sender: 'bob.smith@example.com',
-      subject: 'Reminder',
-      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-    ),
-    Email(
-      sender: 'bob.smith@example.com',
-      subject: 'Reminder',
-      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-    ),
-    Email(
-      sender: 'bob.smith@example.com',
-      subject: 'Reminder',
-      message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-    ),
-    // Add more emails here...
-  ];
+  List<Email> emails = main.emails;
 
   List<Email> selectedEmails = [];
 
@@ -116,7 +37,6 @@ class _MyInboxPageState extends State<MyInboxPage> {
       selectedEmails.clear();
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
