@@ -1,5 +1,3 @@
-import 'dart:developer' as developer;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_designs/main.dart';
 import 'package:flutter_designs/my_profile_editing_page.dart';
