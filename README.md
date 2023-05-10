@@ -18,6 +18,7 @@ UP2047589 - David Skelton, Diggydave123
 
 
 ## Features
+Works on Android phones and web pages
 
 
 ## Design/Implementation Rationale
@@ -55,8 +56,8 @@ google_maps_flutter
 flutter sdk
 flutter cupertino icons
 
-The google maps APIK key for android the project:
-# android/app/src/main/AndroidManifest.xml
+The google maps API key for android the project:
+commented out - android/app/src/main/AndroidManifest.xml
 <manifest>
   <application>
     <meta-data
@@ -66,7 +67,7 @@ The google maps APIK key for android the project:
 </manifest>
 
 and for ios:
-# ios/Runner/AppDelegate.swift
+commented out - ios/Runner/AppDelegate.swift
 GMSServices.provideAPIKey("YOUR_API_KEY_HERE")
 
 ## Built with
