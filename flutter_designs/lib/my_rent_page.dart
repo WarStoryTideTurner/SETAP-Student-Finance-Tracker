@@ -1,4 +1,6 @@
 // import 'dart:ffi';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -36,6 +38,7 @@ class _MyRentPageState extends State<MyRentPage> {
   late List<Event> _selectedEvents;
   late DateTime _selectedDay;
 
+  var body;
   List<Event> _getEventsForDay(DateTime day) {
     return _events[day] ?? [];
   }
@@ -58,7 +61,7 @@ class _MyRentPageState extends State<MyRentPage> {
   void _showAddEventDialog() async {
     final TextEditingController titleController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
-
+    // DateTime selectedDate = _selectedDay;
     DateTime? selectedDate = await showDatePicker(
       context: context,
       initialDate: _selectedDay,
@@ -146,6 +149,7 @@ class _MyRentPageState extends State<MyRentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //child: SafeArea(
       appBar: AppBar(
         title: const Text("House Profile"),
       ),
@@ -371,6 +375,8 @@ class _MyRentPageState extends State<MyRentPage> {
                   ],
                 ),
               ),
+              // ]
+              // ),
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(16),
@@ -467,6 +473,20 @@ class _MyRentPageState extends State<MyRentPage> {
               ),
             ]),
           ]),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _showAddEventDialog,
+      //   child: Row(
+      //     mainAxisSize: MainAxisSize.min,
+      //     children: const [
+      //       Icon(Icons.add),
+      //       SizedBox(width: 8),
+      //       Tooltip(
+      //         message: 'Add Event',
+      //         child: Text('+'),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 
