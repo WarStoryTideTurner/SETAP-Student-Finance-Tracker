@@ -304,15 +304,13 @@ class _MyRentPageState extends State<MyRentPage> {
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          "Rent",
-                          style: TextStyle(fontSize: 10),
-                        ),
-                        Text(
-                          "£2000",
-                          style: TextStyle(fontSize: 16),
-                        ),
+                      children: [
+                        ElevatedButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "Pay",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )),
                       ],
                     )
                   ],
@@ -345,7 +343,7 @@ class _MyRentPageState extends State<MyRentPage> {
                     ),
                     const SizedBox(height: 16),
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton(
                             onPressed: () {
@@ -357,7 +355,10 @@ class _MyRentPageState extends State<MyRentPage> {
                                     );
                                   });
                             },
-                            child: const Text("Pay"),
+                            child: const Text(
+                              "Pay",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
                           ),
                           Text("Total Amount: £$_totalAmount"),
                         ])
@@ -465,7 +466,11 @@ class _MyRentPageState extends State<MyRentPage> {
 
 //
 
-  double _totalAmount = 0;
+
+//  double _totalAmountMoneyPot = 0;
+
+//  double _totalAmount = 0;
+
 
   void _addToMoneyPot(String amount) {
     setState(() {
@@ -496,6 +501,66 @@ Widget _createRoomMatesProfiles(String imagePath) {
       backgroundImage: AssetImage(imagePath),
     ),
   );
+}
+
+class BillPaymentRecord {
+  final String name;
+  final String bill;
+  final double amount;
+  BillPaymentRecord(this.name, this.bill, this.amount);
+}
+
+class BillPayment extends StatefulWidget {
+  @override
+  _BillPaymentState createState() => _BillPaymentState();
+}
+
+class _BillPaymentState extends State<BillPayment> {
+  final List<String> _bills = ["Electricity", "Gas", "Water", "Rent"];
+  String? _selectedBill;
+  late double _amount;
+  final List<BillPaymentRecord> _paymentRecords = [];
+
+  void _selectBill(String bill) {
+    setState(() {
+      _selectedBill = bill;
+    });
+  }
+
+  void _addToPaymentRecords(String name, String bill, double amount) {
+    setState(() {
+      _paymentRecords.insert(0, BillPaymentRecord(name, bill, amount));
+      if (_paymentRecords.length > 3) {
+        _paymentRecords.removeLast();
+      }
+    });
+  }
+
+  void _payBill() {
+    if (_selectedBill == null) {
+      return;
+    }
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return NumericPad(
+          onPressed: (String enteredAmount) {
+            final double amount = double.parse(enteredAmount);
+            _amount = amount;
+            _addToPaymentRecords("John John", _selectedBill!, amount);
+            setState(() {
+              _selectedBill = null;
+            });
+          },
+        );
+      },
+    );
+  }
+
+//
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
 }
 
 class NumericPad extends StatefulWidget {
@@ -603,4 +668,3 @@ class _NumericPadState extends State<NumericPad> {
     );
   }
 }
-//
