@@ -1,4 +1,6 @@
 // import 'dart:ffi';
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -58,7 +60,7 @@ class _MyRentPageState extends State<MyRentPage> {
   void _showAddEventDialog() async {
     final TextEditingController titleController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
-
+    // DateTime selectedDate = _selectedDay;
     DateTime? selectedDate = await showDatePicker(
       context: context,
       initialDate: _selectedDay,
@@ -109,10 +111,15 @@ class _MyRentPageState extends State<MyRentPage> {
             TextButton(
               onPressed: () {
                 final newEvent = Event(
+                  selectedDate: DateTime(
+                    selectedDate!.year,
+                    selectedDate.month,
+                    selectedDate.day,
+                  ),
                   title: titleController.text,
                   description: descriptionController.text,
                   startTime: DateTime(
-                    selectedDate!.year,
+                    selectedDate.year,
                     selectedDate.month,
                     selectedDate.day,
                     startTime!.hour,
@@ -371,6 +378,8 @@ class _MyRentPageState extends State<MyRentPage> {
                   ],
                 ),
               ),
+              // ]
+              // ),
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(16),
@@ -414,6 +423,12 @@ class _MyRentPageState extends State<MyRentPage> {
                                     const TableRow(
                                       children: [
                                         Text(
+                                          'Date',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
                                           'Title',
                                           style: TextStyle(
                                               fontSize: 15,
@@ -442,6 +457,8 @@ class _MyRentPageState extends State<MyRentPage> {
                                     for (final event in _selectedEvents)
                                       TableRow(
                                         children: [
+                                          Text(
+                                              '${event.selectedDate.day}-${event.selectedDate.month}-${event.selectedDate.year}'),
                                           Text(event.title),
                                           Text(event.description),
                                           Text(
@@ -467,6 +484,20 @@ class _MyRentPageState extends State<MyRentPage> {
               ),
             ]),
           ]),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _showAddEventDialog,
+      //   child: Row(
+      //     mainAxisSize: MainAxisSize.min,
+      //     children: const [
+      //       Icon(Icons.add),
+      //       SizedBox(width: 8),
+      //       Tooltip(
+      //         message: 'Add Event',
+      //         child: Text('+'),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 
@@ -476,18 +507,20 @@ class _MyRentPageState extends State<MyRentPage> {
 
   void _addToMoneyPot(String amount) {
     setState(() {
-      _totalAmountMoneyPot += double.parse(amount);
+      _totalAmount += double.parse(amount);
     });
   }
 }
 
 class Event {
+  final DateTime selectedDate;
   final String title; // Add this line
   final String description;
   final DateTime startTime;
   final DateTime endTime;
 
   Event({
+    required this.selectedDate,
     required this.title, // Add this line
     required this.description,
     required this.startTime,
