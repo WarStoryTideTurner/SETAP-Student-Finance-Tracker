@@ -348,25 +348,26 @@ class _MyRentPageState extends State<MyRentPage> {
                     ),
                     const SizedBox(height: 16),
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return NumericPad(
-                                      onPressed: _addToMoneyPot,
-                                    );
-                                  });
-                            },
-                            child: const Text(
-                              "Pay",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return NumericPad(
+                                    onPressed: _addToMoneyPot,
+                                  );
+                                });
+                          },
+                          child: const Text(
+                            "Pay",
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          Text("Total Amount: £$_totalAmount"),
-                        ])
+                        ),
+                        Text("Total Amount: £$_totalAmountMoneyPot"),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -471,11 +472,11 @@ class _MyRentPageState extends State<MyRentPage> {
 
   double _totalAmountMoneyPot = 0;
 
-  double _totalAmount = 0;
+  //double _totalAmount = 0;
 
   void _addToMoneyPot(String amount) {
     setState(() {
-      _totalAmount += double.parse(amount);
+      _totalAmountMoneyPot += double.parse(amount);
     });
   }
 }
@@ -493,6 +494,8 @@ class Event {
     required this.endTime,
   });
 }
+
+//Creates a visible picture of other users at the property
 
 Widget _createRoomMatesProfiles(String imagePath) {
   return Padding(
