@@ -15,14 +15,18 @@ UP2006563 - Jeremy Desrosiers, kijilas\
 UP2047589 - David Skelton, Diggydave123
 
 ## Content
-
+A mobile application designed for students living in shared accomodations. For easy finance and time management.
 
 ## Features
-Works on Android phones and web pages
-
+Works on Android phones and web pages 
+Shared money pot for savings and better finance management. 
+Creating events as reminders for outings with housemates.
+Map feature for better navigation (especially students living in a new city) and time saving.
+Splitting rent and bills among housemates.
 
 ## Design/Implementation Rationale
-
+MVC model used for design. User uses and manipulates the model through controller which leads to model's modification and update that can be then seen by the user.
+Used Flutter Dart for implementation and used Virtual Studio Code as platform to implement by most of the team members. Splitted tasks among members to avoid conflicts. Git repository used to ease work flow between members.
 
 ## Sources
 
