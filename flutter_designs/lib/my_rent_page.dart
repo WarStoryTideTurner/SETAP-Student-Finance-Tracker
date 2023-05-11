@@ -507,7 +507,7 @@ class _MyRentPageState extends State<MyRentPage> {
 
   void _addToMoneyPot(String amount) {
     setState(() {
-      _totalAmountMoneyPot += double.parse(amount);
+      _totalAmount += double.parse(amount);
     });
   }
 }
