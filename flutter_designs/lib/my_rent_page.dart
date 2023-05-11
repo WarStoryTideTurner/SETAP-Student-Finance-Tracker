@@ -26,7 +26,6 @@ class CupertinoTimeText extends StatelessWidget {
 
 class MyRentPage extends StatefulWidget {
   const MyRentPage({Key? key}) : super(key: key);
-
   @override
   State<MyRentPage> createState() => _MyRentPageState();
 }
@@ -306,7 +305,13 @@ class _MyRentPageState extends State<MyRentPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return BillPayment();
+                                  });
+                            },
                             child: const Text(
                               "Pay",
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -464,13 +469,9 @@ class _MyRentPageState extends State<MyRentPage> {
     );
   }
 
-//
+  double _totalAmountMoneyPot = 0;
 
-
-//  double _totalAmountMoneyPot = 0;
-
-//  double _totalAmount = 0;
-
+  double _totalAmount = 0;
 
   void _addToMoneyPot(String amount) {
     setState(() {
@@ -512,10 +513,10 @@ class BillPaymentRecord {
 
 class BillPayment extends StatefulWidget {
   @override
-  _BillPaymentState createState() => _BillPaymentState();
+  BillPaymentState createState() => BillPaymentState();
 }
 
-class _BillPaymentState extends State<BillPayment> {
+class BillPaymentState extends State<BillPayment> {
   final List<String> _bills = ["Electricity", "Gas", "Water", "Rent"];
   String? _selectedBill;
   late double _amount;
@@ -557,9 +558,80 @@ class _BillPaymentState extends State<BillPayment> {
     );
   }
 
-//
+  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return AlertDialog(
+      title: const Text("Pay Bill"),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Select a bill to pay:",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            DropdownButton<String>(
+              value: _selectedBill,
+              items: _bills
+                  .map((bill) => DropdownMenuItem(
+                        child: Text(bill),
+                        value: bill,
+                      ))
+                  .toList(),
+              onChanged: (String? value) {
+                setState(() {
+                  _selectedBill = value;
+                });
+              },
+            ),
+            const SizedBox(height: 16),
+            if (_selectedBill != null)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Enter the amount to pay for $_selectedBill:",
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 16),
+                  NumericPad(
+                    onPressed: (value) {
+                      setState(() {
+                        _amount = double.parse(value);
+                      });
+                    },
+                  )
+                ],
+              )
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        TextButton(
+          child: const Text("Cancel"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        ElevatedButton(
+            onPressed: () {
+              if (_amount > 0) {
+                _paymentRecords.insert(0,
+                    BillPaymentRecord("Karol Karol", _selectedBill!, _amount));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Payment successful!"),
+                  ),
+                );
+                Navigator.of(context).pop();
+              }
+            },
+            child: const Text("Pay"))
+      ],
+    );
   }
 }
 
