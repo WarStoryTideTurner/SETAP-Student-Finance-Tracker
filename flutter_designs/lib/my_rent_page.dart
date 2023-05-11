@@ -1,6 +1,7 @@
 // import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_designs/money_pot.dart';
 
 class CupertinoTimeText extends StatelessWidget {
   const CupertinoTimeText({
@@ -471,6 +472,8 @@ class _MyRentPageState extends State<MyRentPage> {
   }
 
   double _totalAmountMoneyPot = 0;
+  // MoneyPot moneyPot1 = MoneyPot("Money pot", 0);
+  // double get _totalAmountMoneyPot => moneyPot1.getBal.toDouble();
 
   //double _totalAmount = 0;
 
