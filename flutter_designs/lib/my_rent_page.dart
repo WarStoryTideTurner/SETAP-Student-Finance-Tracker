@@ -1,6 +1,6 @@
 // import 'dart:ffi';
-// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -153,7 +153,6 @@ class _MyRentPageState extends State<MyRentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //child: SafeArea(
       appBar: AppBar(
         title: const Text("House Profile"),
       ),
