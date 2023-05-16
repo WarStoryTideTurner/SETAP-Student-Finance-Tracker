@@ -25,6 +25,254 @@ class CupertinoTimeText extends StatelessWidget {
   }
 }
 
+class BillPaymentRecord {
+  final String name;
+  final String bill;
+  final double amount;
+  BillPaymentRecord(this.name, this.bill, this.amount);
+}
+
+class BillPayment extends StatefulWidget {
+  @override
+  BillPaymentState createState() => BillPaymentState();
+}
+
+class BillPaymentState extends State<BillPayment> {
+  final List<String> _bills = ["Electricity", "Gas", "Water", "Rent"];
+  String? _selectedBill;
+  late double _amount;
+  final List<BillPaymentRecord> _paymentRecords = [];
+
+  void _selectBill(String bill) {
+    setState(() {
+      _selectedBill = bill;
+    });
+  }
+
+  void _addToPaymentRecords(String name, String bill, double amount) {
+    setState(() {
+      _paymentRecords.insert(0, BillPaymentRecord(name, bill, amount));
+      if (_paymentRecords.length > 3) {
+        _paymentRecords.removeLast();
+      }
+    });
+  }
+
+  void _payBill() {
+    if (_selectedBill == null) {
+      return;
+    }
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return NumericPad(
+          onPressed: (String enteredAmount) {
+            final double amount = double.parse(enteredAmount);
+            _amount = amount;
+            _addToPaymentRecords("John John", _selectedBill!, amount);
+            setState(() {
+              _selectedBill = null;
+            });
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text("Pay Bill"),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Select a bill to pay:",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            DropdownButton<String>(
+              value: _selectedBill,
+              items: _bills
+                  .map((bill) => DropdownMenuItem(
+                        child: Text(bill),
+                        value: bill,
+                      ))
+                  .toList(),
+              onChanged: (String? value) {
+                setState(() {
+                  _selectedBill = value;
+                });
+              },
+            ),
+            const SizedBox(height: 16),
+            if (_selectedBill != null)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Enter the amount to pay for $_selectedBill:",
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 16),
+                  NumericPad(
+                    onPressed: (value) {
+                      setState(() {
+                        _amount = double.parse(value);
+                      });
+                    },
+                  )
+                ],
+              )
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        TextButton(
+          child: const Text("Cancel"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        ElevatedButton(
+            onPressed: () {
+              if (_amount > 0) {
+                _paymentRecords.insert(0,
+                    BillPaymentRecord("Karol Karol", _selectedBill!, _amount));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Payment successful!"),
+                  ),
+                );
+                Navigator.of(context).pop();
+              }
+            },
+            child: const Text("Pay"))
+      ],
+    );
+  }
+}
+
+Widget _createRoomMatesProfiles(String imagePath) {
+  return Padding(
+    padding: const EdgeInsets.only(right: 16),
+    child: CircleAvatar(
+      radius: 30,
+      backgroundImage: AssetImage(imagePath),
+    ),
+  );
+}
+
+//Numeric Pad
+class NumericPad extends StatefulWidget {
+  final Function(String) onPressed;
+
+  const NumericPad({required this.onPressed});
+
+  @override
+  _NumericPadState createState() => _NumericPadState();
+}
+
+class _NumericPadState extends State<NumericPad> {
+  late String _enteredAmount = "";
+
+  void _addToAmount(String number) {
+    setState(() {
+      _enteredAmount += number;
+    });
+  }
+
+  Widget _buildNumberButton(String number) {
+    return ElevatedButton(
+      onPressed: () {
+        _addToAmount(number);
+      },
+      child: Text(number),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text(
+        "Enter the amount: ",
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            decoration: const InputDecoration(
+              hintText: "£0.00",
+              border: OutlineInputBorder(),
+            ),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            controller: TextEditingController(text: _enteredAmount),
+            onChanged: (value) {
+              _enteredAmount = value;
+            },
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildNumberButton("1"),
+              _buildNumberButton("2"),
+              _buildNumberButton("3")
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildNumberButton("4"),
+              _buildNumberButton("5"),
+              _buildNumberButton("6")
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildNumberButton("7"),
+              _buildNumberButton("8"),
+              _buildNumberButton("9")
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildNumberButton("."),
+              _buildNumberButton("0"),
+              IconButton(
+                icon: const Icon(Icons.backspace),
+                onPressed: () {
+                  setState(() {
+                    _enteredAmount = _enteredAmount.substring(
+                      0,
+                      _enteredAmount.isNotEmpty ? _enteredAmount.length - 1 : 0,
+                    );
+                  });
+                },
+              )
+            ],
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+              onPressed: () {
+                widget.onPressed(_enteredAmount);
+                Navigator.of(context).pop();
+              },
+              child: const Text("Pay"))
+        ],
+      ),
+    );
+  }
+}
+
 class MyRentPage extends StatefulWidget {
   const MyRentPage({Key? key}) : super(key: key);
   @override
@@ -36,6 +284,14 @@ class _MyRentPageState extends State<MyRentPage> {
   late Map<DateTime, List<Event>> _events;
   late List<Event> _selectedEvents;
   late DateTime _selectedDay;
+
+  void _addToMoneyPot(String amount) {
+    setState(() {
+      _totalAmountMoneyPot += double.parse(amount);
+    });
+  }
+
+  double _totalAmountMoneyPot = 0;
 
   List<Event> _getEventsForDay(DateTime day) {
     return _events[day] ?? [];
@@ -144,6 +400,8 @@ class _MyRentPageState extends State<MyRentPage> {
     );
   }
 
+  //Creates a visible picture of other users at the property
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -195,9 +453,11 @@ class _MyRentPageState extends State<MyRentPage> {
         ),
       ),
       body: ListView(
-          // ignore: sort_child_properties_last
-          children: [
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        // ignore: sort_child_properties_last
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               const Center(
                 child: CircleAvatar(
                   radius: 80,
@@ -455,33 +715,30 @@ class _MyRentPageState extends State<MyRentPage> {
                                 ))),
                         const SizedBox(height: 16),
                         Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              ElevatedButton(
-                                  onPressed: _showAddEventDialog,
-                                  child: const Text("Add Event"))
-                            ]),
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                              onPressed: _showAddEventDialog,
+                              child: const Text("Add Event"),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ],
                 ),
               ),
-            ]),
-          ]),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
-  double _totalAmountMoneyPot = 0;
   // MoneyPot moneyPot1 = MoneyPot("Money pot", 0);
   // double get _totalAmountMoneyPot => moneyPot1.getBal.toDouble();
 
   //double _totalAmount = 0;
-
-  void _addToMoneyPot(String amount) {
-    setState(() {
-      _totalAmountMoneyPot += double.parse(amount);
-    });
-  }
 }
 
 class Event {
@@ -498,251 +755,8 @@ class Event {
   });
 }
 
-//Creates a visible picture of other users at the property
 
-Widget _createRoomMatesProfiles(String imagePath) {
-  return Padding(
-    padding: const EdgeInsets.only(right: 16),
-    child: CircleAvatar(
-      radius: 30,
-      backgroundImage: AssetImage(imagePath),
-    ),
-  );
-}
 
-class BillPaymentRecord {
-  final String name;
-  final String bill;
-  final double amount;
-  BillPaymentRecord(this.name, this.bill, this.amount);
-}
 
-class BillPayment extends StatefulWidget {
-  @override
-  BillPaymentState createState() => BillPaymentState();
-}
+// NumericPad
 
-class BillPaymentState extends State<BillPayment> {
-  final List<String> _bills = ["Electricity", "Gas", "Water", "Rent"];
-  String? _selectedBill;
-  late double _amount;
-  final List<BillPaymentRecord> _paymentRecords = [];
-
-  void _selectBill(String bill) {
-    setState(() {
-      _selectedBill = bill;
-    });
-  }
-
-  void _addToPaymentRecords(String name, String bill, double amount) {
-    setState(() {
-      _paymentRecords.insert(0, BillPaymentRecord(name, bill, amount));
-      if (_paymentRecords.length > 3) {
-        _paymentRecords.removeLast();
-      }
-    });
-  }
-
-  void _payBill() {
-    if (_selectedBill == null) {
-      return;
-    }
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return NumericPad(
-          onPressed: (String enteredAmount) {
-            final double amount = double.parse(enteredAmount);
-            _amount = amount;
-            _addToPaymentRecords("John John", _selectedBill!, amount);
-            setState(() {
-              _selectedBill = null;
-            });
-          },
-        );
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text("Pay Bill"),
-      content: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Select a bill to pay:",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            DropdownButton<String>(
-              value: _selectedBill,
-              items: _bills
-                  .map((bill) => DropdownMenuItem(
-                        child: Text(bill),
-                        value: bill,
-                      ))
-                  .toList(),
-              onChanged: (String? value) {
-                setState(() {
-                  _selectedBill = value;
-                });
-              },
-            ),
-            const SizedBox(height: 16),
-            if (_selectedBill != null)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Enter the amount to pay for $_selectedBill:",
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 16),
-                  NumericPad(
-                    onPressed: (value) {
-                      setState(() {
-                        _amount = double.parse(value);
-                      });
-                    },
-                  )
-                ],
-              )
-          ],
-        ),
-      ),
-      actions: <Widget>[
-        TextButton(
-          child: const Text("Cancel"),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        ElevatedButton(
-            onPressed: () {
-              if (_amount > 0) {
-                _paymentRecords.insert(0,
-                    BillPaymentRecord("Karol Karol", _selectedBill!, _amount));
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Payment successful!"),
-                  ),
-                );
-                Navigator.of(context).pop();
-              }
-            },
-            child: const Text("Pay"))
-      ],
-    );
-  }
-}
-
-class NumericPad extends StatefulWidget {
-  final Function(String) onPressed;
-
-  const NumericPad({required this.onPressed});
-
-  @override
-  _NumericPadState createState() => _NumericPadState();
-}
-
-class _NumericPadState extends State<NumericPad> {
-  late String _enteredAmount = "";
-
-  void _addToAmount(String number) {
-    setState(() {
-      _enteredAmount += number;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text(
-        "Enter the amount: ",
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            decoration: const InputDecoration(
-              hintText: "£0.00",
-              border: OutlineInputBorder(),
-            ),
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            controller: TextEditingController(text: _enteredAmount),
-            onChanged: (value) {
-              _enteredAmount = value;
-            },
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildNumberButton("1"),
-              _buildNumberButton("2"),
-              _buildNumberButton("3")
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildNumberButton("4"),
-              _buildNumberButton("5"),
-              _buildNumberButton("6")
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildNumberButton("7"),
-              _buildNumberButton("8"),
-              _buildNumberButton("9")
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildNumberButton("."),
-              _buildNumberButton("0"),
-              IconButton(
-                icon: const Icon(Icons.backspace),
-                onPressed: () {
-                  setState(() {
-                    _enteredAmount = _enteredAmount.substring(
-                      0,
-                      _enteredAmount.isNotEmpty ? _enteredAmount.length - 1 : 0,
-                    );
-                  });
-                },
-              )
-            ],
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-              onPressed: () {
-                widget.onPressed(_enteredAmount);
-                Navigator.of(context).pop();
-              },
-              child: const Text("Pay"))
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNumberButton(String number) {
-    return ElevatedButton(
-      onPressed: () {
-        _addToAmount(number);
-      },
-      child: Text(number),
-    );
-  }
-}
