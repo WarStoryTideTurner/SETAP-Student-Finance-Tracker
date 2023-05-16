@@ -1,8 +1,12 @@
 // ignore_for_file: unused_import
 
 import 'dart:collection';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+
+import 'package:mysql_client/mysql_client.dart';
+
 import 'package:flutter_designs/house_type.dart';
 
 import 'package:flutter_designs/student_class.dart';
@@ -29,78 +33,107 @@ late StudentClass profile;
 late House sampleHouse;
 
 List<Email> emails = [
-  Email(
-    sender: 'john.doe@example.com',
-    subject: 'Meeting',
-    message: 'Hey, are you available for a meeting at 2 PM?',
-  ),
-  Email(
-    sender: 'jane.doe@example.com',
-    subject: 'Task assigned',
-    message: 'You have been assigned a new task, please complete it by EOD.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'steve.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'jenny.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
+  // Email(
+  //   sender: 'john.doe@example.com',
+  //   subject: 'Meeting',
+  //   message: 'Hey, are you available for a meeting at 2 PM?',
+  // ),
+  // Email(
+  //   sender: 'jane.doe@example.com',
+  //   subject: 'Task assigned',
+  //   message: 'You have been assigned a new task, please complete it by EOD.',
+  // ),
+  // Email(
+  //   sender: 'bob.smith@example.com',
+  //   subject: 'Reminder',
+  //   message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  // ),
+  // Email(
+  //   sender: 'steve.smith@example.com',
+  //   subject: 'Reminder',
+  //   message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  // ),
+  // Email(
+  //   sender: 'jenny.smith@example.com',
+  //   subject: 'Reminder',
+  //   message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  // ),
+  // Email(
+  //   sender: 'bob.smith@example.com',
+  //   subject: 'Reminder',
+  //   message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  // ),
+  // Email(
+  //   sender: 'bob.smith@example.com',
+  //   subject: 'Reminder',
+  //   message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  // ),
+  // Email(
+  //   sender: 'bob.smith@example.com',
+  //   subject: 'Reminder',
+  //   message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  // ),
+  // Email(
+  //   sender: 'bob.smith@example.com',
+  //   subject: 'Reminder',
+  //   message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  // ),
+  // Email(
+  //   sender: 'bob.smith@example.com',
+  //   subject: 'Reminder',
+  //   message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  // ),
+  // Email(
+  //   sender: 'bob.smith@example.com',
+  //   subject: 'Reminder',
+  //   message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  // ),
+  // Email(
+  //   sender: 'bob.smith@example.com',
+  //   subject: 'Reminder',
+  //   message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  // ),
+  // Email(
+  //   sender: 'bob.smith@example.com',
+  //   subject: 'Reminder',
+  //   message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
+  // ),
   // Add more emails here...
 ];
 
-void main() {
+Future<List<Email>> getEmailsFromDB() async {
+  List<Email> emailList = [];
+  final conn = await MySQLConnection.createConnection(
+    host: '127.0.0.1',
+    port: 3306,
+    userName: 'root',
+    password: 'Mypassword@1',
+    databaseName: 'setap',
+  );
+
+  await conn.connect();
+  IResultSet results = await conn.execute("SELECT sender subject message FROM inbox WHERE id = ${profile.getID};");
+
+  try {
+    for (ResultSetRow row in results.rows) {
+      final sender = row.colAt(0);
+      final subject = row.colAt(1);
+      final message = row.colAt(2);
+      emailList.add(Email(sender: sender!, subject: subject!, message: message!));
+    }
+    await conn.close();
+  } catch (e) {
+    log("Error fetching from database");
+  }
+  return emailList;
+}
+
+void main() async {
   profile = StudentClass(0, "Karol", "Krzystof Floraan Lubicz-Gruzewski", 'assets/images/pfp1.jpg', "karol69@gmail.com", "42069 420 666");
   sampleHouse =
       House(0, 'assets/images/house1.jpeg', "123", "Perfect Street", "Portsmouth", "PO4 21S", EHouseTypes.semiDetachedHouse, "An ugly small house with a red garage.", 3, 1, 1, true, true, true);
+
+  emails = await getEmailsFromDB();
 
   runApp(const MyApp());
 }
