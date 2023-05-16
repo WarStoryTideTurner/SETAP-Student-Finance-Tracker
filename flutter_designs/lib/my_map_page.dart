@@ -37,7 +37,7 @@ class _MyMapPageState extends State<MyMapPage> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +53,7 @@ class _MyMapPageState extends State<MyMapPage> {
                 ),
                 const SizedBox(height: 16),
                 Expanded(
-                  child: Container(
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.5,
                     child: PageView(
                       children: <Widget>[
