@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_designs/main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   Color welcomeColor = Colors.purple;
   Color rentMoneyPotColor = Colors.white;
   Color profileColor = Colors.green;
