@@ -637,8 +637,6 @@ class _MyRentPageState extends State<MyRentPage> {
                   ],
                 ),
               ),
-              // ]
-              // ),
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(16),
@@ -749,16 +747,6 @@ class _MyRentPageState extends State<MyRentPage> {
       ),
     );
   }
-  // MoneyPot moneyPot1 = MoneyPot("Money pot", 0);
-  // double get _totalAmountMoneyPot => moneyPot1.getBal.toDouble();
-
-  //double _totalAmount = 0;
-
-//  void _addToMoneyPot(String amount) {
-//    setState(() {
-//      _totalAmount += double.parse(amount);
-//    });
-//  }
 }
 
 class Event {
