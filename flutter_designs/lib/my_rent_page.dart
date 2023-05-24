@@ -25,6 +25,22 @@ class CupertinoTimeText extends StatelessWidget {
   }
 }
 
+class Event {
+  final DateTime selectedDate;
+  final String title;
+  final String description;
+  final DateTime startTime;
+  final DateTime endTime;
+
+  Event({
+    required this.selectedDate,
+    required this.title,
+    required this.description,
+    required this.startTime,
+    required this.endTime,
+  });
+}
+
 class BillPaymentRecord {
   final String name;
   final String bill;
@@ -747,20 +763,4 @@ class _MyRentPageState extends State<MyRentPage> {
       ),
     );
   }
-}
-
-class Event {
-  final DateTime selectedDate;
-  final String title; // Add this line
-  final String description;
-  final DateTime startTime;
-  final DateTime endTime;
-
-  Event({
-    required this.selectedDate,
-    required this.title, // Add this line
-    required this.description,
-    required this.startTime,
-    required this.endTime,
-  });
 }
