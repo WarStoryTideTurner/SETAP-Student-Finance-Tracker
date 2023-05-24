@@ -1,8 +1,12 @@
 // ignore_for_file: unused_import
 
 import 'dart:collection';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+
+import 'package:mysql_client/mysql_client.dart';
+
 import 'package:flutter_designs/house_type.dart';
 
 import 'package:flutter_designs/student_class.dart';
@@ -25,82 +29,81 @@ MyHomePage homePage = const MyHomePage();
 MyMapPage mapPage = const MyMapPage();
 MyRentPage rentPage = const MyRentPage();
 
+String currentName = "Harold";
+String currentLName = "Remus";
+
 late StudentClass profile;
 late House sampleHouse;
 
-List<Email> emails = [
-  Email(
-    sender: 'john.doe@example.com',
-    subject: 'Meeting',
-    message: 'Hey, are you available for a meeting at 2 PM?',
-  ),
-  Email(
-    sender: 'jane.doe@example.com',
-    subject: 'Task assigned',
-    message: 'You have been assigned a new task, please complete it by EOD.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'steve.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'jenny.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  Email(
-    sender: 'bob.smith@example.com',
-    subject: 'Reminder',
-    message: 'Just a reminder that our team meeting is tomorrow at 10 AM.',
-  ),
-  // Add more emails here...
-];
+List<Email> emails = [];
 
-void main() {
-  profile = StudentClass(0, "Karol", "Krzystof Floraan Lubicz-Gruzewski", 'assets/images/pfp1.jpg', "karol69@gmail.com", "42069 420 666");
-  sampleHouse =
-      House(0, 'assets/images/house1.jpeg', "123", "Perfect Street", "Portsmouth", "PO4 21S", EHouseTypes.semiDetachedHouse, "An ugly small house with a red garage.", 3, 1, 1, true, true, true);
+Future<List<Email>> getEmailsFromDB() async {
+  List<Email> emailList = [];
+  final conn = await MySQLConnection.createConnection(
+    host: '127.0.0.1',
+    port: 3306,
+    userName: 'root',
+    password: 'Mypassword@1',
+    databaseName: 'setap',
+  );
+
+  await conn.connect();
+  try {
+    IResultSet results = await conn.execute("SELECT sender, subject, message FROM inbox WHERE cust_id = ${profile.getID};");
+
+    for (ResultSetRow row in results.rows) {
+      final sender = row.colAt(0);
+      final subject = row.colAt(1);
+      final message = row.colAt(2);
+      emailList.add(Email(sender: sender!, subject: subject!, message: message!));
+    }
+    await conn.close();
+  } catch (ex) {
+    log("Error: $ex");
+  }
+
+  return emailList;
+}
+
+Future<StudentClass> getProfile() async {
+  final conn = await MySQLConnection.createConnection(
+    host: '127.0.0.1',
+    port: 3306,
+    userName: 'root',
+    password: 'Mypassword@1',
+    databaseName: 'setap',
+  );
+
+  await conn.connect();
+  StudentClass student;
+
+  try {
+    IResultSet results = await conn.execute("SELECT * FROM customer WHERE cust_name = '$currentName' AND cust_surname = '$currentLName';");
+
+    if (results.numOfRows == 1) {
+      ResultSetRow userResults = results.rows.first;
+      student = StudentClass(userResults.typedColByName<int>('cust_id')!, userResults.colByName('cust_name')!, userResults.colByName('cust_surname')!, 'assets/images/pfp1.jpg',
+          userResults.colByName('cust_email')!, userResults.colByName('cust_phone')!);
+    } else {
+      throw Exception("Error: Multiple profiles with that name!");
+    }
+    await conn.close();
+  } catch (ex) {
+    log("Error: $ex");
+    student = StudentClass(1, "Karol", "Krzystof Floraan Lubicz-Gruzewski", 'assets/images/pfp1.jpg', "karol69@gmail.com", "42069 420 666");
+  }
+
+  return student;
+}
+
+Future<House> getHouse() async {
+  return House(0, 'assets/images/house1.jpeg', "123", "Perfect Street", "Portsmouth", "PO4 21S", EHouseTypes.semiDetachedHouse, "An ugly small house with a red garage.", 3, 1, 1, true, true, true);
+}
+
+void main() async {
+  profile = await getProfile();
+  sampleHouse = await getHouse();
+  emails = await getEmailsFromDB();
 
   runApp(const MyApp());
 }

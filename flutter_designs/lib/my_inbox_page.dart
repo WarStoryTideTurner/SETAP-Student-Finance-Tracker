@@ -30,9 +30,9 @@ class _MyInboxPageState extends State<MyInboxPage> {
 
   void deleteSelectedEmails() {
     setState(() {
-      selectedEmails.forEach((email) {
-        emails.remove(email);
-      });
+      for (int i = 0; i < selectedEmails.length; i++) {
+        emails.removeAt(i);
+      }
       selectedEmails.clear();
     });
   }

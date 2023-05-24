@@ -19,9 +19,9 @@ class _MyMapPageState extends State<MyMapPage> {
   void _onMapCreated(GoogleMapController controller) {
     _markers.add(
       Marker(
-        markerId: MarkerId('id-1'),
+        markerId: const MarkerId('id-1'),
         position: _center,
-        infoWindow: InfoWindow(
+        infoWindow: const InfoWindow(
           title: 'Portland',
           snippet: 'Population: 639,863',
         ),
@@ -32,13 +32,12 @@ class _MyMapPageState extends State<MyMapPage> {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    int daysUntilDueDate =
-        DateTime(now.year, now.month + 1, 1).difference(now).inDays;
+    int daysUntilDueDate = DateTime(now.year, now.month + 1, 1).difference(now).inDays;
 
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +53,7 @@ class _MyMapPageState extends State<MyMapPage> {
                 ),
                 const SizedBox(height: 16),
                 Expanded(
-                  child: Container(
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.5,
                     child: PageView(
                       children: <Widget>[
