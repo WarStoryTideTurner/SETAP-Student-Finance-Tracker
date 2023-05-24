@@ -49,6 +49,8 @@ class BillPaymentRecord {
 }
 
 class BillPayment extends StatefulWidget {
+  const BillPayment({super.key});
+
   @override
   BillPaymentState createState() => BillPaymentState();
 }
@@ -58,42 +60,6 @@ class BillPaymentState extends State<BillPayment> {
   String? _selectedBill;
   late double _amount;
   final List<BillPaymentRecord> _paymentRecords = [];
-
-  void _selectBill(String bill) {
-    setState(() {
-      _selectedBill = bill;
-    });
-  }
-
-  void _addToPaymentRecords(String name, String bill, double amount) {
-    setState(() {
-      _paymentRecords.insert(0, BillPaymentRecord(name, bill, amount));
-      if (_paymentRecords.length > 3) {
-        _paymentRecords.removeLast();
-      }
-    });
-  }
-
-  void _payBill() {
-    if (_selectedBill == null) {
-      return;
-    }
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return NumericPad(
-          onPressed: (String enteredAmount) {
-            final double amount = double.parse(enteredAmount);
-            _amount = amount;
-            _addToPaymentRecords("John John", _selectedBill!, amount);
-            setState(() {
-              _selectedBill = null;
-            });
-          },
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,15 +78,19 @@ class BillPaymentState extends State<BillPayment> {
             DropdownButton<String>(
               value: _selectedBill,
               items: _bills
-                  .map((bill) => DropdownMenuItem(
-                        child: Text(bill),
-                        value: bill,
-                      ))
+                  .map(
+                    (bill) => DropdownMenuItem(
+                      value: bill,
+                      child: Text(bill),
+                    ),
+                  )
                   .toList(),
               onChanged: (String? value) {
-                setState(() {
-                  _selectedBill = value;
-                });
+                setState(
+                  () {
+                    _selectedBill = value;
+                  },
+                );
               },
             ),
             const SizedBox(height: 16),
@@ -136,9 +106,11 @@ class BillPaymentState extends State<BillPayment> {
                   const SizedBox(height: 16),
                   NumericPad(
                     onPressed: (value) {
-                      setState(() {
-                        _amount = double.parse(value);
-                      });
+                      setState(
+                        () {
+                          _amount = double.parse(value);
+                        },
+                      );
                     },
                   )
                 ],
@@ -158,11 +130,6 @@ class BillPaymentState extends State<BillPayment> {
               if (_amount > 0) {
                 _paymentRecords.insert(0,
                     BillPaymentRecord("Karol Karol", _selectedBill!, _amount));
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Payment successful!"),
-                  ),
-                );
                 Navigator.of(context).pop();
               }
             },
@@ -295,7 +262,6 @@ class MyRentPage extends StatefulWidget {
   State<MyRentPage> createState() => _MyRentPageState();
 }
 
-//
 class _MyRentPageState extends State<MyRentPage> {
   late Map<DateTime, List<Event>> _events;
   late List<Event> _selectedEvents;
@@ -591,7 +557,7 @@ class _MyRentPageState extends State<MyRentPage> {
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return BillPayment();
+                                    return const BillPayment();
                                   });
                             },
                             child: const Text(
