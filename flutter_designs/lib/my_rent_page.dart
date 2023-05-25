@@ -17,8 +17,10 @@ class CupertinoTimeText extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoDatePicker(
       mode: CupertinoDatePickerMode.time,
-      initialDateTime: DateTime(0, 0, 0, selectedTime.hour, selectedTime.minute),
-      onDateTimeChanged: (DateTime dateTime) => onTimeChanged(TimeOfDay.fromDateTime(dateTime)),
+      initialDateTime:
+          DateTime(0, 0, 0, selectedTime.hour, selectedTime.minute),
+      onDateTimeChanged: (DateTime dateTime) =>
+          onTimeChanged(TimeOfDay.fromDateTime(dateTime)),
     );
   }
 }
@@ -56,7 +58,7 @@ class BillPayment extends StatefulWidget {
 class BillPaymentState extends State<BillPayment> {
   final List<String> _bills = ["Electricity", "Gas", "Water", "Rent"];
   String? _selectedBill;
-  late double _amount;
+  late double _amount = 0;
   final List<BillPaymentRecord> _paymentRecords = [];
 
   @override
@@ -76,7 +78,6 @@ class BillPaymentState extends State<BillPayment> {
             DropdownButton<String>(
               value: _selectedBill,
               items: _bills
-
                   .map(
                     (bill) => DropdownMenuItem(
                       value: bill,
@@ -99,7 +100,8 @@ class BillPaymentState extends State<BillPayment> {
                 children: [
                   Text(
                     "Enter the amount to pay for $_selectedBill:",
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
                   NumericPad(
@@ -198,17 +200,29 @@ class NumericPadState extends State<NumericPad> {
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [_buildNumberButton("1"), _buildNumberButton("2"), _buildNumberButton("3")],
+            children: [
+              _buildNumberButton("1"),
+              _buildNumberButton("2"),
+              _buildNumberButton("3")
+            ],
           ),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [_buildNumberButton("4"), _buildNumberButton("5"), _buildNumberButton("6")],
+            children: [
+              _buildNumberButton("4"),
+              _buildNumberButton("5"),
+              _buildNumberButton("6")
+            ],
           ),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [_buildNumberButton("7"), _buildNumberButton("8"), _buildNumberButton("9")],
+            children: [
+              _buildNumberButton("7"),
+              _buildNumberButton("8"),
+              _buildNumberButton("9")
+            ],
           ),
           const SizedBox(height: 16),
           Row(
@@ -357,7 +371,10 @@ class _MyRentPageState extends State<MyRentPage> {
                   ),
                 );
                 setState(() {
-                  _events[selectedDate] = [..._events[selectedDate] ?? [], newEvent];
+                  _events[selectedDate] = [
+                    ..._events[selectedDate] ?? [],
+                    newEvent
+                  ];
                   _selectedEvents = _events[selectedDate] ?? [];
                 });
                 Navigator.of(context).pop();
@@ -388,7 +405,9 @@ class _MyRentPageState extends State<MyRentPage> {
                 child: DrawerHeader(
                   decoration: BoxDecoration(
                     color: Colors.blue,
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(10)),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(10)),
                   ),
                   child: Center(
                     child: Text(
@@ -476,7 +495,8 @@ class _MyRentPageState extends State<MyRentPage> {
                     const Center(
                       child: Text(
                         "House mates",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -485,11 +505,16 @@ class _MyRentPageState extends State<MyRentPage> {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          _createRoomMatesProfiles('assets/images/profilePictures/person1.jpg'),
-                          _createRoomMatesProfiles('assets/images/profilePictures/person2.jpg'),
-                          _createRoomMatesProfiles('assets/images/profilePictures/person3.jpg'),
-                          _createRoomMatesProfiles('assets/images/profilePictures/person4.jpg'),
-                          _createRoomMatesProfiles('assets/images/profilePictures/person5.jpg'),
+                          _createRoomMatesProfiles(
+                              'assets/images/profilePictures/person1.jpg'),
+                          _createRoomMatesProfiles(
+                              'assets/images/profilePictures/person2.jpg'),
+                          _createRoomMatesProfiles(
+                              'assets/images/profilePictures/person3.jpg'),
+                          _createRoomMatesProfiles(
+                              'assets/images/profilePictures/person4.jpg'),
+                          _createRoomMatesProfiles(
+                              'assets/images/profilePictures/person5.jpg'),
                         ],
                       ),
                     )
@@ -565,7 +590,8 @@ class _MyRentPageState extends State<MyRentPage> {
                     const Center(
                       child: Text(
                         "Money pot",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -618,7 +644,8 @@ class _MyRentPageState extends State<MyRentPage> {
                       children: const [
                         Text(
                           'UPCOMING EVENTS',
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -636,34 +663,47 @@ class _MyRentPageState extends State<MyRentPage> {
                                       children: [
                                         Text(
                                           'Date',
-                                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                         Text(
                                           'Title',
-                                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                         Text(
                                           'Description',
-                                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                         Text(
                                           'Start Time',
-                                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                         Text(
                                           'End Time',
-                                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                       ],
                                     ),
                                     for (final event in _selectedEvents)
                                       TableRow(
                                         children: [
-                                          Text('${event.selectedDate.day}-${event.selectedDate.month}-${event.selectedDate.year}'),
+                                          Text(
+                                              '${event.selectedDate.day}-${event.selectedDate.month}-${event.selectedDate.year}'),
                                           Text(event.title),
                                           Text(event.description),
-                                          Text('${event.startTime.hour}:${event.startTime.minute.toString().padLeft(2, '0')}'),
-                                          Text('${event.endTime.hour}:${event.endTime.minute.toString().padLeft(2, '0')}'),
+                                          Text(
+                                              '${event.startTime.hour}:${event.startTime.minute.toString().padLeft(2, '0')}'),
+                                          Text(
+                                              '${event.endTime.hour}:${event.endTime.minute.toString().padLeft(2, '0')}'),
                                         ],
                                       ),
                                   ],
