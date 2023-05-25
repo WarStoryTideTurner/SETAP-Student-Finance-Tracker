@@ -51,8 +51,23 @@ https://flutter.dev/docs/get-started/install
 You can also get Android Studio with the below link:
 https://developer.android.com/studio.
 
+
+DATABASE CREATION: 
+
+Install MySQl on your computer with the link provided:
+https://dev.mysql.com/downloads/installer/
+
+Create a new connection with following details:
+Hostname: 127.0.0.1
+Port: 3306
+Username: root
+
+Copy the enitre code from the file called "database.sql", into your MySql query. The file is located in the same location as README.md
+If the connection won't be sucessfull the application will not terminate correctly. Possibble error if not set up correctly will be a white screen with no infomation's.
+
 How to get project to your visual studio code:
-1) clone the repository 
+
+1. clone the repository 
 git clone https://github.com/WarStoryTideTurner/SETAP-Student-Finance-Tracker.git
 
 The below dependencies have been used in this project:
